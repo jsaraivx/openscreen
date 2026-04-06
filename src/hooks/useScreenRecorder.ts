@@ -6,8 +6,8 @@ import { requestCameraAccess } from "@/lib/requestCameraAccess";
 
 const TARGET_FRAME_RATE = 60;
 const MIN_FRAME_RATE = 30;
-const TARGET_WIDTH = 3840;
-const TARGET_HEIGHT = 2160;
+const TARGET_WIDTH = 7680;
+const TARGET_HEIGHT = 4320;
 const FOUR_K_PIXELS = TARGET_WIDTH * TARGET_HEIGHT;
 const QHD_WIDTH = 2560;
 const QHD_HEIGHT = 1440;
