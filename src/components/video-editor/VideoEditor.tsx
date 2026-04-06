@@ -1654,6 +1654,8 @@ export default function VideoEditor() {
 									onAspectRatioChange={(ar) =>
 										pushState({
 											aspectRatio: ar,
+											padding: ar === "native" ? 0 : padding,
+											borderRadius: ar === "native" ? 0 : borderRadius,
 											webcamLayoutPreset:
 												!isPortraitAspectRatio(ar) && webcamLayoutPreset === "vertical-stack"
 													? "picture-in-picture"
