@@ -56,7 +56,7 @@ interface TimelineEditorProps {
 	cursorTelemetry?: CursorTelemetryPoint[];
 	zoomRegions: ZoomRegion[];
 	onZoomAdded: (span: Span) => void;
-	onZoomSuggested?: (span: Span, focus: ZoomFocus, depth?: number) => void;
+	onZoomSuggested?: (span: Span, focus: ZoomFocus, depth: number) => void;
 	onZoomSpanChange: (id: string, span: Span) => void;
 	onZoomDelete: (id: string) => void;
 	selectedZoomId: string | null;

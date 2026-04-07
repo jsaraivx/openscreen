@@ -81,6 +81,26 @@ export function detectZoomDwellCandidates(samples: CursorTelemetryPoint[]): Zoom
 		}
 	}
 
+	// Flush the last run if it's a valid dwell
+	const lastStart = samples[runStart];
+	const lastEnd = samples[samples.length - 1];
+	const lastDuration = lastEnd.timeMs - lastStart.timeMs;
+
+	if (lastDuration >= MIN_DWELL_DURATION_MS) {
+		const runSamples = samples.slice(runStart);
+		const avgCx = runSamples.reduce((sum, s) => sum + s.cx, 0) / runSamples.length;
+		const avgCy = runSamples.reduce((sum, s) => sum + s.cy, 0) / runSamples.length;
+
+		rawDwells.push({
+			startTimeMs: lastStart.timeMs + ZOOM_REACTION_DELAY_MS,
+			endTimeMs: lastEnd.timeMs,
+			centerTimeMs: Math.round((lastStart.timeMs + lastEnd.timeMs) / 2),
+			focus: { cx: avgCx, cy: avgCy },
+			strength: lastDuration,
+			depth: calculateAdaptiveDepth(avgCx, avgCy, lastDuration),
+		});
+	}
+
 	if (rawDwells.length === 0) return [];
 
 	const groupedDwells: ZoomDwellCandidate[] = [];
